@@ -1,0 +1,4 @@
+{
+  "routes": [
+    { "src": "/((search|images|url).*)?", "dest": "/api/[app].py" }]
+}

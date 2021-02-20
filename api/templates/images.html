@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images Search</title>
+    <script src="/static/uilib.js"></script>
+    <link rel="stylesheet" href="/static/image-styles.css" />
+  </head>
+  <body data-bing="{{bing}}" data-google="{{google}}" data-query="{{query}}">
+    <div id="root"></div>
+    <script>
+      const dataSet = document.body.dataset || {
+        bing: document.body.getAttribute("data-bing"),
+        google: document.body.getAttribute("data-google"),
+        query: document.body.getAttribute("data-query"),
+      };
+      window._initialData = {
+        bing: JSON.parse(dataSet.bing),
+        google: JSON.parse(dataSet.google),
+        query: dataSet.query,
+      };
+    </script>
+    <script src="/static/image-app-es5.js"></script>
+  </body>
+</html>

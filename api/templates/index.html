@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>SearchPy-A meta search engine</title>
+    <meta
+      name="description"
+      content="A meta search engine,features of google,bing,youtube in 1 web app"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script>
+      window.searchpy = {};
+      window.failed_ = {};
+    </script>
+    <style>
+      .input_n {
+        border: none;
+        border: 1px solid #6200ee;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        outline: none;
+        width: 50%;
+        height: 30px;
+        padding: 8px;
+      }
+
+      .submit-button {
+        text-transform: uppercase;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        padding: 8px;
+        border: none;
+        outline: none;
+        background: #3367d6;
+        color: white;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        margin-top: 20px;
+      }
+
+      a {
+        color: #000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="margin: auto; text-align: center">
+      <span>Meta Search Engine</span>
+      <form action="/search">
+        <div>
+          <input type="text" class="input_n" name="q" />
+          <button class="submit-button">Go</button>
+        </div>
+      </form>
+
+      <a href="/images/search/">
+        <span style="margin-right: 20px">Image Search</span>
+      </a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    {%- if not q -%}
+    <script>
+        window.location.replace("/youtube/")
+    </script>
+    {%- endif -%}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <meta name="referrer" content="no-referrer">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel='stylesheet' href='../static/styles/youtube.min.css' />
+    <script>
+        window.use_custom_dl = false
+        var doctitle = decodehtml(decodehtml("{{q}}"));
+        if (doctitle.length != 0) {
+            var titles = "Results for " + doctitle
+            document.title = titles;
+        } else {
+            document.title = "Results from youtube.com"
+        }
+    </script>
+    <title>{{q|safe}}-Youtube Search</title>
+</head>
+
+<body>
+    <button class=ipg id=ytdl>Use Custom Youtube Downloader</button>
+    <div>
+        <div class=center_s>
+            <div id='youtubeprev'></div>
+            <input class=rc id=search placeholder=search>
+            <button class=rc id=s-button onclick="search()">search</button>
+            <br>
+            <div id=content style="display:none;"></div>
+            <div id=skelly class=skelly style="margin-top: 20px;">
+                <span style="font-size: 12px;color:#000;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px;" class=skelly_btn>Loading Videos</span>
+                <div>
+                    <div>
+                        <button id=skelly_div style="height:225px;width:400px;margin-top:30px;"></button>
+                    </div>
+                    <button class=skelly_btn id=skelly_btn style="margin-top: 10px;"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src='/static/jsmin/youtube_search.min.js'></script>
+    <script>
+        search_init("{{q}}");
+    </script>
+</body>
+
+</html>

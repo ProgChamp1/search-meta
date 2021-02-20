@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <meta name='viewport' content="width=device-width,initial-scale=1.0" />
+    <title>{{query}}-Searchpy</title>
+    <meta name='description' content="A meta search engine,features of google,bing,youtube in 1 web app" />
+    <link rel='shortcut icon' href='/favicon.ico' />
+    <link rel='stylesheet' href='../static/styles/search.min.css' />
+</head>
+
+<body>
+    <form action='/search'>
+        <div>
+            <input type="text" class="input_n" id='search_button' name='q'>
+            <button class=submit-button>Go</button>
+        </div>
+    </form>
+    <div class=images-youtube=bar>
+        <span class=other_searches>
+            <a href='/images/search?q={{query}}'>Images</a>
+        </span>
+        <span class=other_searches>
+            <a href="/youtube/search?q={{query}}">Youtube</a>
+        </span>
+    </div>
+    <div id=skelly>
+        <div class="skelly_misc"></div>
+        <div class="skelly_misc"></div>
+        <div class="skelly_misc"></div>
+        <div class="skelly_misc"></div>
+    </div>
+    <div class=content id=main style="display: none;">
+        <h1>Results from Google</h1>
+        <div id=google></div>
+        <a id=load-more-goog data-start='{{start+10}}' href="/search?q={{query}}&start={{start+10}}">
+            <div class=load-more>Load More Results From Google</div>
+        </a>
+        <h1>Results from Bing</h1>
+        <div id=bing></div>
+        <a id=load-more-bing data-start='{{start+10}}' href="/search?q={{query}}&start={{start+10}}">
+            <div class=load-more>Load More Results From Bing</div>
+        </a>
+    </div>
+    <script>
+        function make_results(data_dict, container) {
+            if (data_dict.length == 0) {
+                container.innerHTML += '<div>No Links Found</div>';
+            }
+            for (dat in data_dict) {
+                var div = document.createElement("div");
+                var link = document.createElement("a");
+                var cache_link = document.createElement("a");
+                var link_text = document.createElement('span');
+                var title = document.createElement("h3");
+                var deets = document.createElement("div");
+                var cached_box = document.createElement("span");
+                var data = data_dict[dat];
+                var cached = data.cached;
+                link_text.className = "link_cite";
+                div.className = 'search-result'
+                link.href = "/url?url=" + encodeURIComponent(data.link);
+                title.innerHTML = data.heading;
+                title.className = 'title_'
+                deets.innerHTML = data.text;
+                deets.className = 'result-snipps'
+                cached_box.innerHTML = "View Cached";
+                cached_box.className = 'cached';
+                link_text.innerHTML = data.link;
+                link.appendChild(title);
+                link.appendChild(link_text);
+                div.appendChild(link);
+                div.appendChild(deets);
+                container.appendChild(div);
+                if (cached) {
+                    cache_link.href = "/url?url=" + encodeURIComponent(cached);;
+                    cache_link.appendChild(cached_box);
+                    div.appendChild(cache_link);
+                }
+            }
+        }
+
+        function decodehtml(html) {
+            var txt = document.createElement("textarea");
+            return txt.innerHTML = html, txt.value
+        }
+        (function () {
+            q = "{{query}}";
+            req = new Request('/search/get_results/?start={{start}}&q=' + encodeURIComponent(q));
+            document.getElementById("search_button").value = decodehtml(q);
+            fetch(req).then(resp =>
+                resp.json()).then(ret => {
+                google = ret.google;
+                bing = ret.bing;
+                google_data = google.data;
+                bing_data = bing.data;
+                document.getElementById("main").style.display = 'block';
+                document.getElementById('skelly').style.display = 'none';
+                make_results(google_data, document.getElementById("google"));
+                make_results(bing_data, document.getElementById("bing"));
+            }).catch(e => {
+                if (window.location.protocol == 'file:') {
+                    return
+                }
+                console.error(e);
+                document.body.innerHTML = "Snap...something broke on our end..apologies";
+
+            })
+        })();
+        var load_more_goog = document.getElementById("load-more-goog");
+        var load_more_bing = document.getElementById("load-more-bing");
+        (function (a, b, c, d) {
+            function spec_search(name, start) {
+                fetch('/search/get/' + name + "?start=" + start + "&q={{query}}")
+                    .then(res => res.json())
+                    .then(ret => {
+                        make_results(ret[name].data, document.getElementById(name))
+                    }).catch(e => {
+                        document.getElementById(name).innerHTML += "<div>Can't find more links</div>"
+                    })
+            }
+            a.addEventListener("click", function (e) {
+                e.preventDefault();
+                a.setAttribute("data-start", parseInt(a.getAttribute("data-start")) + 10)
+                start = a.getAttribute("data-start")
+                spec_search(c, start)
+            });
+            b.addEventListener("click", function (e) {
+                e.preventDefault();
+                b.setAttribute("data-start", parseInt(b.getAttribute("data-start")) + 10);
+                start = a.getAttribute("data-start")
+                spec_search(d, start)
+            });
+
+        })(load_more_goog, load_more_bing, 'google', 'bing')
+    </script>
+</body>

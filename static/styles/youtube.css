@@ -1,0 +1,112 @@
+  a {
+      color: black;
+  }
+
+  #skelly {
+      transition: 1.5s;
+  }
+
+  .skelly_btn {
+      -moz-border-radius: 100px;
+      -webkit-border-radius: 100px;
+      border-radius: 100px;
+      padding: 8px;
+      border: none;
+      width: 25%;
+      outline: none;
+      background: #e3e3e3;
+      color: white;
+      text-transform: uppercase;
+      cursor: inherit;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      transition: 1.5s;
+  }
+
+  #skelly_div {
+      padding: 8px;
+      border: none;
+      outline: none;
+      background: #e3e3e3;
+      color: #000;
+      text-transform: uppercase;
+      cursor: inherit;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      transition: 1.5s;
+  }
+
+  .rounded-image {
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      height: 300px;
+      width: 400px;
+      max-width: 100%;
+  }
+
+  .rc {
+      -moz-border-radius: 15px;
+      -webkit-border-radius: 15px;
+      border-radius: 15px;
+      padding: 4px;
+  }
+
+  #s-button {
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      padding: 8px;
+      border: none;
+      outline: none;
+      background: #3367d6;
+      color: white;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  .center_s {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+  }
+
+  input,
+  textarea,
+  button {
+      outline: none
+  }
+
+  .ipg {
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      padding: 8px;
+      border: none;
+      outline: none;
+      background: #3367d6;
+      color: white;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      transition: 0.5s;
+  }
